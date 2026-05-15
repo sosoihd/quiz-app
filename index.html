@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mes Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+      --accent: #6366f1; --text: #f1f5f9; --text-muted: #94a3b8;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; padding: 2rem 1rem;
+    }
+    header { text-align: center; margin-bottom: 3rem; }
+    header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    header p  { color: var(--text-muted); }
+    #quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .quiz-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      border: 2px solid transparent;
+      transition: border-color 0.15s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .quiz-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .quiz-card .tag {
+      font-size: 0.75rem; font-weight: 600; color: var(--accent);
+      background: rgba(99,102,241,0.15); border-radius: 99px;
+      padding: 0.2rem 0.6rem; width: fit-content;
+    }
+    .quiz-card h2 { font-size: 1.05rem; font-weight: 700; }
+    .quiz-card p  { font-size: 0.85rem; color: var(--text-muted); flex: 1; }
+    .quiz-card .meta {
+      font-size: 0.8rem; color: var(--text-muted);
+      display: flex; gap: 1rem; margin-top: 0.5rem;
+    }
+    .empty {
+      text-align: center; color: var(--text-muted);
+      grid-column: 1/-1; padding: 4rem 0;
+    }
+    .empty span { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mes Quiz</h1>
+    <p>Révise avec les quiz générés depuis tes cours</p>
+  </header>
+
+  <div id="quiz-grid">
+    <!-- Les cartes sont injectées dynamiquement via quiz-index.json -->
+  </div>
+
+  <script>
+    fetch('./quiz-index.json')
+      .then(r => r.json())
+      .then(quizzes => {
+        const grid = document.getElementById('quiz-grid');
+        if (!quizzes.length) {
+          grid.innerHTML = '<div class="empty"><span>📭</span>Aucun quiz pour l\'instant.<br>Le premier arrivera dès que tu enverras du contenu NotebookLM.</div>';
+          return;
+        }
+        grid.innerHTML = quizzes.map(q => `
+          <a class="quiz-card" href="./quizzes/${q.slug}.html">
+            <span class="tag">${q.subject || 'Quiz'}</span>
+            <h2>${q.title}</h2>
+            <p>${q.description || ''}</p>
+            <div class="meta">
+              <span>❓ ${q.count} questions</span>
+              <span>📅 ${q.date}</span>
+            </div>
+          </a>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('quiz-grid').innerHTML =
+          '<div class="empty"><span>📭</span>Aucun quiz pour l\'instant.</div>';
+      });
+  </script>
+</body>
+</html>

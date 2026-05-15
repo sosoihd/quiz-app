@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{QUIZ_TITLE}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/quiz.css" />
+</head>
+<body>
+
+  <header>
+    <h1>{{QUIZ_TITLE}}</h1>
+    <p>{{QUIZ_DESCRIPTION}}</p>
+  </header>
+
+  <div id="quiz-wrap">
+    <div id="quiz-container">
+      <p id="progress-label"></p>
+      <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+      <div class="question-card">
+        <p class="question-text" id="question-text"></p>
+        <ul class="options-list" id="options-list"></ul>
+        <div id="feedback"></div>
+      </div>
+
+      <div id="nav-btns">
+        <button class="btn" id="next-btn" disabled>Suivant →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="score-screen">
+    <div id="score-circle">
+      <span id="score-number">0</span>
+      <span id="score-total"></span>
+    </div>
+    <h2>Quiz terminé !</h2>
+    <p id="score-message"></p>
+    <button class="btn" id="retry-btn" onclick="">Recommencer</button>
+    <button class="btn" onclick="window.location.href='../index.html'">Retour à la liste</button>
+  </div>
+
+  <script>
+    const QUIZ_DATA = {{QUIZ_JSON}};
+  </script>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
