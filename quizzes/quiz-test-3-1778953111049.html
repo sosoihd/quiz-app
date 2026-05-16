@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz Test 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/quiz.css" />
+</head>
+<body>
+<header><h1>Quiz Test 3</h1><p>10 questions — Avehri Tayri</p></header>
+<div id="quiz-wrap"><div id="quiz-container">
+<p id="progress-label"></p>
+<div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+<div class="question-card">
+<p class="question-text" id="question-text"></p>
+<ul class="options-list" id="options-list"></ul>
+<div id="feedback"></div>
+</div>
+<div id="nav-btns">
+<button class="btn" id="next-btn" disabled>Suivant &#8594;</button>
+</div>
+</div></div>
+<div id="score-screen">
+<div id="score-circle">
+<span id="score-number">0</span><span id="score-total"></span>
+</div>
+<h2>Quiz termin&#233; !</h2>
+<p id="score-message"></p>
+<button class="btn" id="retry-btn">Recommencer</button>
+<a class="btn" href="../index.html">Retour</a>
+</div>
+<script>const QUIZ_DATA={"title":"Quiz Test 3","description":"10 questions — Avehri Tayri","subject":"Avehri Tayri","questions":[{"question":"Dans le cadre de l'audit du cycle Ventes-Clients, quel risque est spécifiquement adressé par la vérification qu'une facture de vente existe pour chaque bon d'expédition (BL) ?","options":["L'exhaustivité de la facturation","L'imputation comptable","La protection du patrimoine","La réalité des ventes"],"correct":0,"explanation":"S'assurer que chaque expédition physique a donné lieu à une facture permet de confirmer que la totalité des ventes réalisées est capturée dans le système."},{"question":"Quel risque majeur pèse sur la valorisation des stocks lors de l'inventaire de fin d'exercice ?","options":["L'enregistrement de stocks n'existant pas physiquement","L'absence de provision pour dépréciation sur les stocks à rotation lente","L'utilisation d'un plan de stockage non documenté","L'omission de marchandises appartenant à l'entreprise mais situées chez des tiers"],"correct":1,"explanation":"La valorisation correcte nécessite d'identifier les stocks abîmés ou ne tournant pas pour ajuster leur valeur comptable à leur valeur vénale."},{"question":"Pour le Commissaire aux Comptes (CAC), qu'est-ce qui définit un système ou une fonction comme 'significatif' lors de la prise de connaissance de l'entité ?","options":["L'utilisation exclusive de logiciels de gestion intégrés (PGI)","Le niveau de compétence technique du responsable de service","Le traitement de données répétitives ayant une incidence significative sur les comptes annuels","Le nombre d'employés travaillant dans le service concerné"],"correct":2,"explanation":"Les systèmes significatifs sont ceux qui gèrent les gros volumes d'opérations (ventes, achats, salaires) impactant directement le résultat."},{"question":"Dans le cycle clients-ventes, quelle procédure de contrôle interne permet de prévenir les créances insolvables ?","options":["L'envoi systématique d'un double du bon de livraison au client","La numérotation séquentielle des factures de vente","Le lettrage régulier des comptes clients par le service comptable","L'approbation des conditions financières et des plafonds de crédit avant l'acceptation de la commande"],"correct":3,"explanation":"Le contrôle préventif au moment de la commande limite le risque de vendre à des clients douteux sans garanties de paiement."},{"question":"Quelle est la conséquence directe d'un défaut de séparation des tâches entre l'acheteur et le responsable de la comptabilité fournisseurs ?","options":["Un risque accru de détournement de fonds ou d'engagements non autorisés","Une augmentation des délais de livraison des fournisseurs","L'impossibilité de réaliser un inventaire physique annuel","Une diminution automatique de la valeur vénale des stocks"],"correct":0,"explanation":"La séparation des fonctions de décision (achat) et d'enregistrement (comptabilité) est essentielle pour éviter qu'une personne puisse initier et masquer une opération frauduleuse."},{"question":"Lors d'un audit de stock, pourquoi le CAC procède-t-il à un rapprochement entre l'inventaire physique et la comptabilité ?","options":["Pour s'assurer que les stocks appartiennent juridiquement à l'entreprise","Pour vérifier la réalité et l'exhaustivité des stocks enregistrés","Pour déterminer le coût de revient unitaire des produits finis","Pour valider le choix de la méthode d'évaluation (FIFO ou CUMP)"],"correct":1,"explanation":"Ce rapprochement confirme que ce qui est en comptabilité existe physiquement (réalité) et que tout ce qui existe physiquement est enregistré (exhaustivité)."},{"question":"Dans l'assertion de 'coupure des exercices' pour le cycle ventes, quel est l'objectif du CAC ?","options":["Contrôler que les tarifs appliqués sont conformes au catalogue de l'année $N$","Vérifier que toutes les factures de l'année ont été payées avant la clôture","S'assurer que les ventes sont rattachées à l'exercice au cours duquel la livraison a eu lieu","Valider que le montant de la TVA a été correctement calculé"],"correct":2,"explanation":"Le principe d'indépendance des exercices exige que le produit soit reconnu au moment du transfert de propriété (généralement la livraison)."},{"question":"Quelle faiblesse de contrôle interne est illustrée par l'absence de relance systématique des factures impayées dans une entreprise ?","options":["Risque d'enregistrement multiple d'une même facture","Absence de réalité des opérations enregistrées","Défaut d'exhaustivité des ventes enregistrées","Risque de non-recouvrement et défaillance de la protection du patrimoine"],"correct":3,"explanation":"Une relance 'au coup par coup' sans procédure formalisée augmente le risque de perte financière et dégrade la qualité de l'actif (créances)."},{"question":"Pourquoi le CAC doit-il s'assurer que les sacs de matières premières en stock sont clairement différenciés selon leur appartenance ?","options":["Pour garantir que seuls les actifs appartenant à l'entreprise sont inscrits au bilan","Pour respecter les normes d'hygiène et de sécurité industrielle","Pour optimiser l'espace de stockage dans l'entrepôt","Pour faciliter le calcul du coût de revient moyen pondéré"],"correct":0,"explanation":"L'inventaire doit exclure les stocks détenus pour le compte de tiers (consignation, sous-traitance) pour respecter l'assertion de propriété."},{"question":"Parmi ces techniques, laquelle permet au CAC de vérifier l'efficacité du fonctionnement du contrôle interne sur toute l'année ?","options":["L'examen analytique des variations de marge brute","L'entretien initial avec le dirigeant de l'entreprise","Le test de procédures sur un échantillon représentatif d'opérations","La confirmation directe des soldes auprès des clients (circularisation)"],"correct":2,"explanation":"Les tests de procédures visent à obtenir des éléments probants sur l'efficacité constante des contrôles mis en place par l'entreprise."}]};</script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
