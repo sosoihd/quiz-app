@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/quiz.css" />
+</head>
+<body>
+  <header><h1>Mon Quiz</h1><p>10 questions — Maths</p></header>
+  <div id="quiz-wrap">
+    <div id="quiz-container">
+      <p id="progress-label"></p>
+      <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+      <div class="question-card">
+        <p class="question-text" id="question-text"></p>
+        <ul class="options-list" id="options-list"></ul>
+        <div id="feedback"></div>
+      </div>
+      <div id="nav-btns">
+        <button class="btn" id="next-btn" disabled>Suivant &#x2192;</button>
+      </div>
+    </div>
+  </div>
+  <div id="score-screen">
+    <div id="score-circle">
+      <span id="score-number">0</span><span id="score-total"></span>
+    </div>
+    <h2>Quiz termin&#233; !</h2>
+    <p id="score-message"></p>
+    <button class="btn" id="retry-btn">Recommencer</button>
+    <button class="btn" onclick="window.location.href=&#39;../index.html&#39;">Retour</button>
+  </div>
+  <script>
+    const QUIZ_DATA = {
+  "title": "Mon Quiz",
+  "description": "10 questions — Maths",
+  "subject": "Maths",
+  "questions": [
+    {
+      "question": "Selon le cadre COSO 2013, laquelle de ces options constitue l'une des cinq composantes interdépendantes du contrôle interne ?",
+      "options": [
+        "L'environnement de contrôle",
+        "La planification stratégique",
+        "L'optimisation fiscale",
+        "L'analyse de la concurrence"
+      ],
+      "correct": 0,
+      "explanation": "Cette composante représente le socle du contrôle interne, englobant l'intégrité, les valeurs éthiques et la structure organisationnelle de l'entité."
+    },
+    {
+      "question": "Dans le cadre de l'évaluation des risques, quel élément a été spécifiquement mis en avant par l'évolution du COSO ?",
+      "options": [
+        "Le risque de fraude",
+        "Le risque de change",
+        "Le risque de réputation",
+        "Le risque environnemental"
+      ],
+      "correct": 0,
+      "explanation": "Le cadre COSO impose désormais une évaluation explicite des risques de fraude lors de l'analyse des facteurs pouvant compromettre les objectifs."
+    },
+    {
+      "question": "Que recouvre la composante 'Pilotage' (ou Monitoring) dans le système COSO ?",
+      "options": [
+        "L'évaluation permanente et ponctuelle de l'efficacité du contrôle interne",
+        "La direction quotidienne des équipes de production",
+        "La fixation annuelle des objectifs de performance",
+        "L'audit externe légal des comptes"
+      ],
+      "correct": 0,
+      "explanation": "Le pilotage permet de s'assurer que les composantes du contrôle interne sont bien présentes et fonctionnent de manière continue."
+    },
+    {
+      "question": "Parmi les principes de 'l'environnement de contrôle', lequel souligne l'indépendance de la surveillance ?",
+      "options": [
+        "L'indépendance du conseil d'administration vis-à-vis du management",
+        "L'autonomie financière des différents services",
+        "L'absence de liens hiérarchiques entre les employés",
+        "L'externalisation systématique de la comptabilité"
+      ],
+      "correct": 0,
+      "explanation": "Le conseil doit exercer une surveillance indépendante sur le développement et la performance du contrôle interne."
+    },
+    {
+      "question": "Quelle est la finalité principale des 'activités de contrôle' selon le cadre conceptuel ?",
+      "options": [
+        "S'assurer que les directives du management pour limiter les risques sont appliquées",
+        "Augmenter le chiffre d'affaires de l'entreprise",
+        "Remplacer le jugement humain par des systèmes informatiques",
+        "Réduire le nombre de procédures écrites"
+      ],
+      "correct": 0,
+      "explanation": "Les activités de contrôle sont les politiques et procédures qui aident à garantir que les mesures nécessaires sont prises pour maîtriser les risques."
+    },
+    {
+      "question": "Dans l'évaluation de la composante 'Information et Communication', quel critère est essentiel pour la qualité de l'information ?",
+      "options": [
+        "La pertinence et l'exactitude de l'information communiquée",
+        "L'utilisation exclusive de supports papier pour la traçabilité",
+        "La diffusion de toutes les informations à tous les employés",
+        "Le volume massif de données produites"
+      ],
+      "correct": 0,
+      "explanation": "Pour être utile au contrôle interne, l'information doit être fiable, actuelle et distribuée aux bonnes personnes dans les délais."
+    },
+    {
+      "question": "Lorsqu'un Commissaire aux Comptes (CAC) vérifie l'existence du système de contrôle interne, quel test utilise-t-il ?",
+      "options": [
+        "Un test de conformité",
+        "Une procédure de confirmation directe",
+        "Un test de performance individuelle",
+        "Une revue analytique de fin d'année"
+      ],
+      "correct": 0,
+      "explanation": "Le test de conformité confirme que le descriptif du système correspond bien à la réalité des procédures prévues par l'entreprise."
+    },
+    {
+      "question": "Que doit faire l'auditeur si un test de conformité révèle une divergence entre la procédure écrite et la pratique ?",
+      "options": [
+        "Examiner d'autres transactions pour confirmer si la divergence est systématique",
+        "Émettre immédiatement un rapport avec réserve",
+        "Ignorer la divergence si le montant de la transaction est faible",
+        "Demander le licenciement du personnel n'appliquant pas la procédure"
+      ],
+      "correct": 0,
+      "explanation": "L'auditeur doit s'assurer qu'il n'a pas choisi une transaction exceptionnelle avant de corriger sa description du système."
+    },
+    {
+      "question": "Selon le COSO, quel est l'objectif final du contrôle interne vis-à-vis des parties prenantes ?",
+      "options": [
+        "Fournir une assurance raisonnable quant à la réalisation des objectifs",
+        "Garantir l'absence totale de fraude au sein de l'entreprise",
+        "Remplacer la responsabilité de la direction",
+        "Éliminer le besoin d'un audit externe des comptes"
+      ],
+      "correct": 0,
+      "explanation": "En raison des limites inhérentes à tout système (erreur humaine, collusion), le contrôle interne ne peut offrir qu'une assurance raisonnable, pas absolue."
+    },
+    {
+      "question": "Lequel de ces principes appartient à l'objectif 'Fiabilité des informations financières' ?",
+      "options": [
+        "L'exhaustivité des enregistrements",
+        "La maximisation du profit trimestriel",
+        "Le respect des normes de sécurité physique des locaux",
+        "Le recrutement systématique de personnel bilingue"
+      ],
+      "correct": 0,
+      "explanation": "L'exhaustivité garantit que toutes les opérations devant être enregistrées l'ont effectivement été, évitant les omissions dans les comptes."
+    }
+  ]
+};
+  </script>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
